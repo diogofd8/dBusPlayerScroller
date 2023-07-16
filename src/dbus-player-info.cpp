@@ -115,9 +115,7 @@ void DBusPlayerInfo::updateSongInfo ()
     }
 
     // Format the song metadata
-    std::cout << "hello" << std::endl;
     _songInfo = getSongPrefix() + songArtists + getSongSeparator() + songTitle + getSongSuffix();
-    std::cout << _songInfo << std::endl;
     return;
 }
 

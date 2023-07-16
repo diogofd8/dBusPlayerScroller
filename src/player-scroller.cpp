@@ -29,7 +29,6 @@ void PlayerScroller::refreshMetadata ()
         return;
 
     // If updated metadata is of size 0, it means the player was closed
-    std::cout << "songSz: " << getSongInfo().size() << std::endl;
     if (!getSongInfo().size())
     {
         _metadataBuffer = "";

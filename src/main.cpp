@@ -26,7 +26,7 @@ class ProgramOptions
         ProgramOptions () :
             playerName("spotify"),
             metataPrefix(""),
-            metadataSuffix(" | "),
+            metadataSuffix("  "),
             metadataSeparator(" - "),
             viewLength(30),
             scrollSpeed(250),
