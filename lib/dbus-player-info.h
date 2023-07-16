@@ -64,7 +64,6 @@ class DBusPlayerInfo
             _songPrefix = songPrefix;
         }
         inline void setSongSuffix (const std::string& songSuffix) {
-            std::cout << "suffix: " << songSuffix << std::endl;
             _songSuffix = songSuffix;
         }
         inline void setSongSeparator (const std::string& songSeparator) {
