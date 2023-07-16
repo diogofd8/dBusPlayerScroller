@@ -36,6 +36,15 @@ class DBusPlayerInfo
         inline const std::string& getPlayerName () const {
             return _playerName;
         }
+        inline const std::string& getSongPrefix () const {
+            return _songPrefix;
+        }
+        inline const std::string& getSongSuffix () const {
+            return _songSuffix;
+        }
+        inline const std::string& getSongSeparator () const {
+            return _songSeparator;
+        }
         inline PLAYBACK_STATUS getPlayerStatus () const {
             return _playerStatus;
         }
@@ -50,6 +59,16 @@ class DBusPlayerInfo
         }
         inline bool getMetadataSyncState () const {
             return _isMetadataSynced;
+        }
+        inline void setSongPrefix (const std::string& songPrefix) {
+            _songPrefix = songPrefix;
+        }
+        inline void setSongSuffix (const std::string& songSuffix) {
+            std::cout << "suffix: " << songSuffix << std::endl;
+            _songSuffix = songSuffix;
+        }
+        inline void setSongSeparator (const std::string& songSeparator) {
+            _songSeparator = songSeparator;
         }
 
     protected:
@@ -77,6 +96,9 @@ class DBusPlayerInfo
         std::string _playbackMetadata;
         std::string _songInfo;
         std::string _playerName;
+        std::string _songPrefix;
+        std::string _songSuffix;
+        std::string _songSeparator;
         bool _isMetadataSynced;
         PLAYBACK_STATUS _playerStatus;
         CommandInterface* _pCommandInterface;

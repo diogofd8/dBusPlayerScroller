@@ -25,15 +25,21 @@ class ProgramOptions
     public:
         ProgramOptions () :
             playerName("spotify"),
+            metataPrefix(""),
+            metadataSuffix(" | "),
+            metadataSeparator(" - "),
             viewLength(30),
             scrollSpeed(250),
             debugMode(false),
-            syntax("Syntax: dBusStringScroller [Options]\nOptions:\n\t-p | --player\t[player name]\n\t-s | --speed\t[scroll speed]\n\t-l | --length\t[view length]\n\t-d | --debug")
+            syntax("Syntax: dBusStringScroller [Options]\nOptions:\n\t-p | --player\t\t[player name]\n\t-s | --speed\t\t[scroll speed]\n\t-l | --length\t\t[view length]\n\t-x | --suffix\t\t[metadata suffix]\n\t-f | --prefix\t\t[metadata prefix]\n\t-r | --separator\t[metadata separator]\n\t-d | --debug")
         {}
         ~ProgramOptions () {}
 
     public:
         std::string playerName;
+        std::string metataPrefix;
+        std::string metadataSuffix;
+        std::string metadataSeparator;
         int viewLength;
         size_t scrollSpeed;
         bool debugMode;
@@ -76,6 +82,27 @@ ProgramOptions execArgsParser (int argc, char* argv[])
             else
                 bParseError = true;
         }
+        else if (arg == "--suffix" || arg == "-x")
+        {
+            if (argc > ++i  && argv[i][0] != '-')
+                options.metadataSuffix = argv[i];
+            else
+                bParseError = true;
+        }
+        else if (arg == "--prefix" || arg == "-f")
+        {
+            if (argc > ++i  && argv[i][0] != '-')
+                options.metataPrefix = argv[i];
+            else
+                bParseError = true;
+        }
+        else if (arg == "--separator" || arg == "-r")
+        {
+            if (argc > ++i  && argv[i][0] != '-')
+                options.metadataSeparator = argv[i];
+            else
+                bParseError = true;
+        }
         else if (arg == "--debug" || arg == "-d")
             options.debugMode = true;
         else
@@ -91,7 +118,7 @@ ProgramOptions execArgsParser (int argc, char* argv[])
 
     // Print selected options
     if (options.debugMode)
-        printf("%s[%s] [%s] [%s] [Options: --player %s --speed %ld --length %d]%s\n", MAIN_COLOR, pCmdI->getSystemClock().c_str(), SY_MAIN, __func__, options.playerName.c_str(), options.scrollSpeed, options.viewLength, MAIN_COLOR_RESET);
+        printf("%s[%s] [%s] [%s] [Options: --player %s --speed %ld --length %d --prefix '%s' --suffix '%s' --separator '%s' --debug %d]%s\n", MAIN_COLOR, pCmdI->getSystemClock().c_str(), SY_MAIN, __func__, options.playerName.c_str(), options.scrollSpeed, options.viewLength, options.metataPrefix.c_str(), options.metadataSuffix.c_str(), options.metadataSeparator.c_str(), static_cast<int>(options.debugMode), MAIN_COLOR_RESET);
 
     return options;
 }
@@ -177,6 +204,14 @@ int main (int argc, char* argv[])
 
     // Initialize the StringScroller
     PlayerScroller mediaPlayer(options.playerName);
+
+    // Set the metadata prefix, suffix and separator
+    if (!options.metataPrefix.empty())
+        mediaPlayer.setSongPrefix(options.metataPrefix);
+    if (!options.metadataSuffix.empty())
+        mediaPlayer.setSongSuffix(options.metadataSuffix);
+    if (!options.metadataSeparator.empty())
+        mediaPlayer.setSongSeparator(options.metadataSeparator);
 
     // Metadata thread
     std::thread tPlaybackMetadata([&]()
