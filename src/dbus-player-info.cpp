@@ -9,7 +9,7 @@ DBusPlayerInfo::DBusPlayerInfo (const std::string& playerName)
     _isMetadataSynced = false;
     _playerStatus = PLAYBACK_STATUS::NOT_FOUND;
     _pCommandInterface = &CommandInterface::getInstance();
-    setPlayerName(playerName);
+    setPlayerName(std::move(playerName));
 }
 
 DBusPlayerInfo::~DBusPlayerInfo ()

@@ -61,27 +61,27 @@ class DBusPlayerInfo
             return _isMetadataSynced;
         }
         inline void setSongPrefix (const std::string& songPrefix) {
-            _songPrefix = songPrefix;
+            _songPrefix = std::move(songPrefix);
         }
         inline void setSongSuffix (const std::string& songSuffix) {
-            _songSuffix = songSuffix;
+            _songSuffix = std::move(songSuffix);
         }
         inline void setSongSeparator (const std::string& songSeparator) {
-            _songSeparator = songSeparator;
+            _songSeparator = std::move(songSeparator);
         }
 
     protected:
         inline void setPlaybackMetadata (const std::string& playbackMetadata) {
-            _playbackMetadata = playbackMetadata;
+            _playbackMetadata = std::move(playbackMetadata);
         }
         inline void setSongInfo (const std::string& songInfo) {
-            _songInfo = songInfo;
+            _songInfo = std::move(songInfo);
         }
         inline void setPlayerName (const std::string& playerName) {
-            _playerName = playerName;
+            _playerName = std::move(playerName);
         }
         inline void setPlayerStatus (const PLAYBACK_STATUS currentStatus) {
-            _playerStatus = currentStatus;
+            _playerStatus = std::move(currentStatus);
         }
         inline void toggleMetadataSyncState (const bool currentState) {
             _isMetadataSynced = currentState;
