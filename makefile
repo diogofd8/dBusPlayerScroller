@@ -1,6 +1,6 @@
 # Compiler information
 CC := g++
-CFLAGS := -std=c++17 -Wall -Wextra -pedantic -O3 -g -pthread
+CFLAGS := -std=c++20 -Wall -Wextra -pedantic -O3 -g -pthread
 
 # Directories
 SRCDIR := src
